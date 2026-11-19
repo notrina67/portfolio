@@ -51,7 +51,7 @@ html = f'''<!doctype html>
 <meta property="og:image" content="https://chloerui.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="chloe le portfolio: a photo card surrounded by chat bubbles listing design skills, over a sky with daisies">
+<meta property="og:image:alt" content="chloe le portfolio landing page">
 <meta name="twitter:image" content="https://chloerui.com/og.png">
 <meta name="theme-color" content="#7FB2E5">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
