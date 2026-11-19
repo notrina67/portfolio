@@ -13,6 +13,17 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Chloe Le","jobTitle":"Designer and Visual Development Artist","url":"https://chloerui.com/","address":{"@type":"PostalAddress","addressLocality":"Dallas","addressRegion":"TX","addressCountry":"US"},"alumniOf":{"@type":"CollegeOrUniversity","name":"The University of Texas at Dallas"},"knowsAbout":["UI/UX design","Visual development","Game art","3D modeling","Graphic design","Art direction"],"sameAs":["https://www.linkedin.com/in/chlo-le"]}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:url" content="https://chloerui.com/">
+<meta property="og:site_name" content="chloe le">
+<meta property="og:image" content="https://chloerui.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="chloe le portfolio: a photo card surrounded by chat bubbles listing design skills, over a sky with daisies">
+<meta name="twitter:image" content="https://chloerui.com/og.png">
+<meta name="theme-color" content="#7FB2E5">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gochi+Hand&amp;family=Inter:wght@400;500;600;700&amp;family=Nunito:wght@400;600;700;800;900&amp;display=swap">
 <style>
@@ -115,7 +126,7 @@ a{color:#356544}a:hover{color:#1C1C1E}
 .cw-l{top:0;bottom:0;left:0;width:var(--d);background:#CDCDCD;clip-path:polygon(0 0,100% var(--d),100% calc(100% - var(--d)),0 100%)}
 .cw-r{top:0;bottom:0;right:0;width:var(--d);background:#CDCDCD;clip-path:polygon(0 var(--d),100% 0,100% 100%,0 calc(100% - var(--d)))}
 .cw-back{position:absolute;left:var(--d);right:var(--d);top:var(--d);bottom:var(--d);pointer-events:none;background:#E1E1E1}
-.inlay.m-grass{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#E3E0DD}.inlay.m-alu{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#E3E0DD}.inlay.m-paper{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#E3E0DD}.inlay.m-marble{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#E3E0DD}
+.inlay.m-grass{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#DBD8D4}.inlay.m-alu{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#DBD8D4}.inlay.m-paper{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#DBD8D4}.inlay.m-marble{--img:url(/_blob/5620543dd1735929ab81c3dea2bef3f2);--tint:#DBD8D4}
 .inlay.m-grass,.inlay.m-alu,.inlay.m-paper,.inlay.m-marble{background:var(--tint)}
 .inlay[class*=" m-"] .cw-back{background:var(--img) center/cover,var(--tint)}
 .inlay[class*=" m-"] .cw-t{background:linear-gradient(rgba(0,0,0,0.11),rgba(0,0,0,0.11)),var(--img) center top/cover,var(--tint)}
@@ -478,7 +489,7 @@ footer{position:relative;z-index:3}
 <sc-if value="{{th.grass}}" hint-placeholder-val="{{ false }}">
 <sc-for list="{{grassBack}}" as="g" hint-placeholder-count="8">
 <div class="grass" aria-hidden="true" style="position: absolute; bottom: -12px; left: {{g.x}}%; width: {{g.vw}}px; height: {{g.h}}px; margin-left: -60px; filter: blur({{g.b}}px); animation-duration: {{g.dur}}s; animation-delay: {{g.del}}s; pointer-events: none">
-<svg width="100%" height="100%" viewBox="{{g.vb}}"><path d="{{g.d}}" fill="{{g.c}}"/></svg>
+<svg width="100%" height="100%" viewBox="{{g.vb}}"><path d="{{g.d}}" fill="{{g.c}}"></path></svg>
 </div>
 </sc-for>
 </sc-if>
@@ -486,13 +497,13 @@ footer{position:relative;z-index:3}
 <div class="bub-pos" aria-hidden="{{m.hidden}}" style="position: absolute; left: {{m.x}}%; top: {{m.y}}%; transform: translate(-50%, -50%); z-index: {{m.z}}">
 <div class="bub" style="animation-duration: {{m.dur}}s; animation-delay: {{m.del}}s">
 <sc-if value="{{m.toggle}}" hint-placeholder-val="{{ false }}">
-<div class="shake"><button class="toggle-btn" onClick="{{m.onClick}}" aria-label="switch color palette"><div class="tb" style="position: relative; white-space: nowrap; padding: 13px 22px; border-radius: 28px; background: {{th.sent}}; color: #FFFFFF; font-family: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', system-ui, sans-serif; font-size: 22px; font-weight: 600; line-height: 1.3; filter: drop-shadow(0 6px 9px rgba(20,40,10,0.2))">{{m.text}}<svg width="43" height="27" viewBox="-16 0 33 21" style="position: absolute; right: -8px; bottom: 0; z-index: -1"><path d="M-16 0 V21 H17 C10 20 6 14 6 0 Z" fill="{{th.sent}}"/></svg></div></button></div>
+<div class="shake"><button class="toggle-btn" onClick="{{m.onClick}}" aria-label="switch color palette"><div class="tb" style="position: relative; white-space: nowrap; padding: 13px 22px; border-radius: 28px; background: {{th.sent}}; color: #FFFFFF; font-family: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', system-ui, sans-serif; font-size: 22px; font-weight: 600; line-height: 1.3; filter: drop-shadow(0 6px 9px rgba(20,40,10,0.2))">{{m.text}}<svg width="43" height="27" viewBox="-16 0 33 21" style="position: absolute; right: -8px; bottom: 0; z-index: -1"><path d="M-16 0 V21 H17 C10 20 6 14 6 0 Z" fill="{{th.sent}}"></path></svg></div></button></div>
 </sc-if>
 <sc-if value="{{m.sentPlain}}" hint-placeholder-val="{{ false }}">
-<div style="position: relative; max-width: 260px; white-space: nowrap; padding: 9px 15px; border-radius: 20px; background: {{th.sent}}; color: #FFFFFF; font-family: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', system-ui, sans-serif; font-size: 16px; line-height: 1.3; filter: drop-shadow(0 6px 9px rgba(20,40,10,0.2))">{{m.text}}<svg width="33" height="21" viewBox="-16 0 33 21" style="position: absolute; right: -6px; bottom: 0; z-index: -1"><path d="M-16 0 V21 H17 C10 20 6 14 6 0 Z" fill="{{th.sent}}"/></svg></div>
+<div style="position: relative; max-width: 260px; white-space: nowrap; padding: 9px 15px; border-radius: 20px; background: {{th.sent}}; color: #FFFFFF; font-family: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', system-ui, sans-serif; font-size: 16px; line-height: 1.3; filter: drop-shadow(0 6px 9px rgba(20,40,10,0.2))">{{m.text}}<svg width="33" height="21" viewBox="-16 0 33 21" style="position: absolute; right: -6px; bottom: 0; z-index: -1"><path d="M-16 0 V21 H17 C10 20 6 14 6 0 Z" fill="{{th.sent}}"></path></svg></div>
 </sc-if>
 <sc-if value="{{m.recv}}" hint-placeholder-val="{{ true }}">
-<div style="position: relative; max-width: 260px; white-space: nowrap; padding: 9px 15px; border-radius: 20px; background: {{th.recv}}; color: {{th.recvText}}; font-family: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', system-ui, sans-serif; font-size: 16px; line-height: 1.3; filter: drop-shadow(0 6px 9px rgba(20,40,10,0.2))">{{m.text}}<svg width="33" height="21" viewBox="0 0 33 21" style="position: absolute; left: -6px; bottom: 0; z-index: -1"><path d="M33 0 V21 H0 C7 20 11 14 11 0 Z" fill="{{th.recv}}"/></svg></div>
+<div style="position: relative; max-width: 260px; white-space: nowrap; padding: 9px 15px; border-radius: 20px; background: {{th.recv}}; color: {{th.recvText}}; font-family: -apple-system, 'SF Pro Text', 'Inter', 'Helvetica Neue', system-ui, sans-serif; font-size: 16px; line-height: 1.3; filter: drop-shadow(0 6px 9px rgba(20,40,10,0.2))">{{m.text}}<svg width="33" height="21" viewBox="0 0 33 21" style="position: absolute; left: -6px; bottom: 0; z-index: -1"><path d="M33 0 V21 H0 C7 20 11 14 11 0 Z" fill="{{th.recv}}"></path></svg></div>
 </sc-if>
 </div>
 </div>
@@ -512,9 +523,9 @@ footer{position:relative;z-index:3}
 <div style="display: flex; flex-direction: column; gap: 6px; padding: 0 8px 8px 8px">
 <h1 style="margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: {{th.name}}">chloe le</h1>
 <span style="display: flex; align-items: center; gap: 8px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif; font-size: 14px; font-weight: 500; color: {{th.sub}}">
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>dallas, tx + nyc</span>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>dallas, tx + nyc</span>
 <span style="display: flex; align-items: center; gap: 8px; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Helvetica Neue', sans-serif; font-size: 14px; font-weight: 500; color: {{th.sub}}">
-<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3l3 3-11 11H7v-3z"/><path d="M4 21h16"/></svg>visual artist + digital designer</span>
+<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3l3 3-11 11H7v-3z"></path><path d="M4 21h16"></path></svg>visual artist + digital designer</span>
 </div>
 </div>
 </div>
@@ -525,7 +536,7 @@ footer{position:relative;z-index:3}
 <sc-if value="{{th.grass}}" hint-placeholder-val="{{ false }}">
 <sc-for list="{{grassFront}}" as="g" hint-placeholder-count="8">
 <div class="grass" aria-hidden="true" style="position: absolute; bottom: -12px; left: {{g.x}}%; width: {{g.vw}}px; height: {{g.h}}px; margin-left: -60px; filter: blur({{g.b}}px); animation-duration: {{g.dur}}s; animation-delay: {{g.del}}s; pointer-events: none">
-<svg width="100%" height="100%" viewBox="{{g.vb}}"><path d="{{g.d}}" fill="{{g.c}}"/></svg>
+<svg width="100%" height="100%" viewBox="{{g.vb}}"><path d="{{g.d}}" fill="{{g.c}}"></path></svg>
 </div>
 </sc-for>
 </sc-if>
@@ -711,7 +722,7 @@ footer{position:relative;z-index:3}
 <h2 class="ios-sec">Experience</h2>
 <div class="ios-card">
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">Handshake</span><span class="ios-row-date">Apr 2026 &#8211; present</span></div>
+<div class="ios-row-head"><span class="ios-row-title">Handshake</span><span class="ios-row-date">Apr 2026 – present</span></div>
 <div class="ios-row-sub">Creative specialist, Project Touchstone - remote</div>
 <ul class="ios-list">
 <li>Produced 25+ original assets across 2D illustration and graphic design using Adobe Photoshop, Illustrator, and open-source programs like Krita and Inkscape, meeting project-specific style and quality specifications</li>
@@ -719,7 +730,7 @@ footer{position:relative;z-index:3}
 </ul>
 </div>
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">Meta</span><span class="ios-row-date">Aug 2025 &#8211; Nov 2025</span></div>
+<div class="ios-row-head"><span class="ios-row-title">Meta</span><span class="ios-row-date">Aug 2025 – Nov 2025</span></div>
 <div class="ios-row-sub">Technical artist, MediaGen - remote</div>
 <ul class="ios-list">
 <li>Collaborated with a team of hundreds of technical artists to manage and quality-check 200+ daily items in multimedia datasets and assets, applying consistent visual and brand standards at scale</li>
@@ -727,7 +738,7 @@ footer{position:relative;z-index:3}
 </ul>
 </div>
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">Studio Adore</span><span class="ios-row-date">Feb 2025 &#8211; Jun 2025</span></div>
+<div class="ios-row-head"><span class="ios-row-title">Studio Adore</span><span class="ios-row-date">Feb 2025 – Jun 2025</span></div>
 <div class="ios-row-sub">Project manager / outreach coordinator - Seattle, WA</div>
 <ul class="ios-list">
 <li>Managed overlapping production deadlines and the timely start of multiple concurrent projects for an independent animation studio, including end-to-end coordination of a multimedia collaboration with Wacom from concept through final release</li>
@@ -735,7 +746,7 @@ footer{position:relative;z-index:3}
 </ul>
 </div>
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">Apple</span><span class="ios-row-date">Dec 2023 &#8211; Dec 2024</span></div>
+<div class="ios-row-head"><span class="ios-row-title">Apple</span><span class="ios-row-date">Dec 2023 – Dec 2024</span></div>
 <div class="ios-row-sub">Data imagery editor (2D environment) - remote</div>
 <ul class="ios-list">
 <li>Audited high volumes of 2D and 3D imagery assets in Adobe Photoshop against quality and layout standards, conducting recurring QA reviews to confirm accuracy before release</li>
@@ -743,7 +754,7 @@ footer{position:relative;z-index:3}
 </ul>
 </div>
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">University of Texas at Dallas</span><span class="ios-row-date">Aug 2022 &#8211; Dec 2023</span></div>
+<div class="ios-row-head"><span class="ios-row-title">University of Texas at Dallas</span><span class="ios-row-date">Aug 2022 – Dec 2023</span></div>
 <div class="ios-row-sub">Assistant designer - Dallas, TX</div>
 <ul class="ios-list">
 <li>Managed 50+ design projects for official university media outlets from concept through final execution on a rolling basis, coordinating with university faculty to meet publication deadlines</li>
@@ -751,7 +762,7 @@ footer{position:relative;z-index:3}
 </ul>
 </div>
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">RolePros</span><span class="ios-row-date">May 2021 &#8211; Oct 2021</span></div>
+<div class="ios-row-head"><span class="ios-row-title">RolePros</span><span class="ios-row-date">May 2021 – Oct 2021</span></div>
 <div class="ios-row-sub">Social media manager + designer - Dallas–Fort Worth</div>
 <ul class="ios-list">
 <li>Ran social for Manpuku Dallas, the Tokyo yakiniku chain's first Texas location, from its May 2021 launch through its June opening; @manpuku.dallas has since grown to ~4.9k followers</li>
@@ -766,7 +777,7 @@ footer{position:relative;z-index:3}
 <h2 class="ios-sec">Leadership</h2>
 <div class="ios-card">
 <div class="ios-row">
-<div class="ios-row-head"><span class="ios-row-title">Asian Artists Association</span><span class="ios-row-date">May 2022 &#8211; May 2024</span></div>
+<div class="ios-row-head"><span class="ios-row-title">Asian Artists Association</span><span class="ios-row-date">May 2022 – May 2024</span></div>
 <div class="ios-row-sub">President / founder - Dallas, TX</div>
 <ul class="ios-list">
 <li>Founded and grew membership of a minority arts organization to 500+ within a year, funded 25+ local Dallas artists and raised hundreds of dollars for LGBTQ+ youth and other charities</li>
@@ -967,7 +978,7 @@ footer{position:relative;z-index:3}
 </sc-if>
 </div>
 </sc-if>
-<span>&#169; chloe le</span>
+<span>© chloe le</span>
 </div>
 <span class="socials socials-foot">
 <a class="soc-btn" href="mailto:rinathile@gmail.com" aria-label="email chloe"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"></rect><path d="M4 7.5l8 5.5 8-5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>

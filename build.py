@@ -17,6 +17,20 @@ schema, code = json.loads(m.group(1)), m.group(2)
 props = {k: v['default'] for k, v in schema.items() if not k.startswith('$') and 'default' in v}
 
 os.makedirs(OUT, exist_ok=True)
+# Icons from the daisy logo
+from PIL import Image
+LOGO = os.path.join(OUT, '_blob', '3ad73b6355711990dec500b2a9de6198')
+logo = Image.open(LOGO).convert('RGBA')
+logo.resize((32, 32), Image.LANCZOS).save(os.path.join(OUT, 'favicon-32.png'))
+logo.resize((192, 192), Image.LANCZOS).save(os.path.join(OUT, 'icon-192.png'))
+logo.save(os.path.join(OUT, 'favicon.ico'), sizes=[(16, 16), (32, 32), (48, 48)])
+touch = Image.new('RGBA', (180, 180), (247, 241, 225, 255))
+touch.alpha_composite(logo.resize((150, 150), Image.LANCZOS), (15, 15))
+touch.convert('RGB').save(os.path.join(OUT, 'apple-touch-icon.png'))
+# Static files (link preview image, robots, sitemap)
+STATIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+for f in os.listdir(STATIC):
+    shutil.copyfile(os.path.join(STATIC, f), os.path.join(OUT, f))
 shutil.copyfile(os.path.join(os.path.dirname(__file__), 'node_modules/preact/dist/preact.min.umd.js'), os.path.join(OUT, 'preact.js'))
 rt = open(os.path.join(os.path.dirname(__file__), 'src/runtime.js'), encoding='utf-8').read()
 app = '(function(){\n' + code + '\nDCMount(Component, ' + json.dumps(props) + ');\n})();\n'
@@ -33,6 +47,17 @@ html = f'''<!doctype html>
 <head>{head.rstrip()}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta property="og:url" content="https://chloerui.com/">
+<meta property="og:site_name" content="chloe le">
+<meta property="og:image" content="https://chloerui.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="chloe le portfolio: a photo card surrounded by chat bubbles listing design skills, over a sky with daisies">
+<meta name="twitter:image" content="https://chloerui.com/og.png">
+<meta name="theme-color" content="#7FB2E5">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 {helmet.strip()}
 </head>
 <body>
