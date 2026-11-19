@@ -1,0 +1,6 @@
+{
+  "name": "chloerui",
+  "private": true,
+  "scripts": { "deploy": "wrangler deploy" },
+  "devDependencies": { "preact": "^10.29.8" }
+}
