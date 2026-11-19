@@ -10,6 +10,7 @@
     "run_worker_first": ["/_blob/*"]
   },
   "routes": [
-    { "pattern": "chloerui.com", "custom_domain": true }
+    { "pattern": "chloerui.com", "custom_domain": true },
+    { "pattern": "www.chloerui.com", "custom_domain": true }
   ]
 }
