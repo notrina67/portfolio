@@ -10,6 +10,11 @@ export default {
     }
     const res = await env.ASSETS.fetch(request);
     const m = url.pathname.match(/^\/_blob\/([0-9a-f]{32})$/);
+    if ((res.headers.get('Content-Type') || '').startsWith('text/html')) {
+      const page = new Response(res.body, res);
+      page.headers.set('Cache-Control', 'no-cache');
+      return page;
+    }
     if (!m || !res.ok) return res;
     const out = new Response(res.body, res);
     out.headers.set('Content-Type', TYPES[m[1]] || 'application/octet-stream');
