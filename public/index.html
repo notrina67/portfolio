@@ -233,6 +233,7 @@ footer{position:relative;z-index:3}
 .room-hero + div,.room-hero ~ section{position:relative}
 }
 .gal-row{display:flex;flex-wrap:wrap;gap:12px}
+.gal-video{display:block;width:100%;max-width:720px;aspect-ratio:4/3;margin:0 auto;border-radius:8px;background:#000;box-shadow:0 2px 8px rgba(28,28,30,0.08)}
 .gal-tile{display:block;min-width:0;border:0;padding:0;margin:0;font:inherit;cursor:zoom-in;border-radius:8px;overflow:hidden;background:#F2F2F7;box-shadow:0 2px 8px rgba(28,28,30,0.08);transition:transform .2s ease,box-shadow .2s ease}
 .gal-tile img{width:100%;height:100%;object-fit:cover;display:block}
 .gal-tile:hover,.gal-tile:focus-visible{transform:translateY(-4px);box-shadow:0 8px 18px rgba(28,28,30,0.14)}
@@ -681,12 +682,15 @@ footer{position:relative;z-index:3}
 <section style="position: relative; display: flex; flex-direction: column; gap: 18px">
 <sc-if value="{{g.pencil}}" hint-placeholder-val="{{ false }}"><img class="pencil-poke" src="/_blob/9fd41221f70996560f9d5d7b33ccc4b0" alt="" aria-hidden="true"></sc-if>
 <h2 style="margin: 0; display: flex; align-items: baseline; justify-content: center; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 24px; font-weight: 700; letter-spacing: -0.015em; color: #1C1C1E; border-bottom: 1px solid #E5E5EA; padding-bottom: 12px">{{g.name}}<span style="font-size: 14px; font-weight: 500; color: #6E6E73">{{g.count}}</span></h2>
+<sc-if value="{{g.video}}" hint-placeholder-val="{{ false }}"><video class="gal-video" src="{{g.video}}" poster="{{g.poster}}" controls playsinline preload="metadata" aria-label="beabadoobee edit by Chloe Le"></video></sc-if>
+<sc-if value="{{g.hasItems}}" hint-placeholder-val="{{ true }}">
 <div class="gal-row">
 <sc-for list="{{g.items}}" as="it" hint-placeholder-count="6">
 <button type="button" class="gal-tile" aria-label="{{it.label}}" onClick="{{it.open}}" style="flex: {{it.flex}}; aspect-ratio: {{it.ar}}"><img src="{{it.src}}" alt="{{it.alt}}" loading="lazy" decoding="async"></button>
 </sc-for>
 <span aria-hidden="true" style="flex: 1000 1 0px; height: 0"></span>
 </div>
+</sc-if>
 <sc-if value="{{g.hasMore}}" hint-placeholder-val="{{ true }}">
 <button class="gal-more" onClick="{{g.toggle}}">{{g.moreLabel}}</button>
 </sc-if>
@@ -990,7 +994,7 @@ footer{position:relative;z-index:3}
 </div>
 </template>
 <script src="/preact.js"></script>
-<script src="/runtime.js?v=3dd901f3"></script>
-<script src="/app.js?v=3dd901f3"></script>
+<script src="/runtime.js?v=0a8299f9"></script>
+<script src="/app.js?v=0a8299f9"></script>
 </body>
 </html>

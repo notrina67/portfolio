@@ -83,7 +83,7 @@
       if (val == null || val === false) continue;
       props[at.n] = val;
     }
-    if (n.tag === 'video') { props.muted = true; props.playsInline = true; }
+    if (n.tag === 'video') { props.playsInline = true; if ('autoplay' in props) props.muted = true; }
     return h.apply(null, [n.tag, props].concat(kidsOf(n, scope)));
   }
   function kidsOf(n, scope) {
