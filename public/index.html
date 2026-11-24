@@ -394,6 +394,11 @@ footer{position:relative;z-index:3}
 .inlay-m[data-lit] .mplate{filter:drop-shadow(2.1px 2.1px 0.2px rgba(20,12,6,0.45)) drop-shadow(0 0 5px rgba(255,200,120,0.16)) brightness(1.03)}
 @media (prefers-reduced-motion: reduce){.bc-dim,.bc-spot,.inlay::after,.bookcase .inlay,.shelf-plate,.mplate,.ba-poster img,.cab{transition:none}}
 @media (prefers-reduced-motion: reduce){.inlay .proj-art{transition:none}}
+.inlay .proj-text{align-items:center!important;text-align:center!important}
+.inlay .proj-title{text-align:center!important;font-weight:700!important;font-size:clamp(12px,1.2vw,17px)!important;line-height:1.15!important;margin-top:3px!important}
+.inlay .proj-kind{text-align:center!important;font-size:clamp(10px,0.8vw,12px)!important;color:#7C7C80!important}
+.inlay.inlay-m .proj-title{font-size:13px!important;white-space:normal!important}
+.inlay.inlay-m .proj-kind{font-size:11px!important}
 @media (max-width:700px){.inlay.inlay-m .inlay-row{align-items:flex-start;gap:12px}.inlay.inlay-m .proj{flex:0 0 calc(50% - 6px);height:auto;aspect-ratio:1/1}.inlay.inlay-m .proj-title{font-size:13px}.inlay.inlay-m .proj-kind{font-size:11px}.pj-video{border-radius:12px}}
 .socials{display:flex;gap:10px;align-items:center}
 .soc-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;text-decoration:none;transition:transform .15s ease,opacity .15s ease}
@@ -585,10 +590,10 @@ footer{position:relative;z-index:3}
 
 <sc-if value="{{isWork}}" hint-placeholder-val="{{ true }}">
 <div class="room-pad work-pad" style="max-width: 1240px; margin: 0 auto; padding: 36px 40px 0 40px; display: flex; flex-direction: column; align-items: center; gap: 32px">
-<h1 class="ios-large work-title" style="margin: 0; text-align: center">work :)</h1>
+<h1 class="ios-large work-title" style="margin: 0; text-align: center">work</h1>
 <div class="bookcase-scroll" style="width: 100%; align-self: stretch">
 <div class="bookcase">
-<div class="bookcase-head"><h1 class="ios-large">work :)</h1></div>
+<div class="bookcase-head"><h1 class="ios-large">work</h1></div>
 <div class="bc-dim" aria-hidden="true"></div><span class="bc-spot" data-prow="0" aria-hidden="true" style="left: -1.1%; top: 3.04%; width: 20%; height: 7%"></span><span class="bc-spot" data-prow="1" aria-hidden="true" style="left: 82.7%; top: 19.17%; width: 20%; height: 7%"></span><span class="bc-spot" data-prow="2" aria-hidden="true" style="left: -1.1%; top: 35.42%; width: 20%; height: 7%"></span><span class="bc-spot" data-prow="3" aria-hidden="true" style="left: 82.7%; top: 51.13%; width: 20%; height: 7%"></span><span class="bc-spot bc-spot-ba" data-prow="ba" aria-hidden="true" style="left: 17.4%; top: 72.2%; width: 30%; height: 11%"></span>
 
 <button class="ba-poster ba-d" data-row="ba" onClick="{{openBa}}" aria-label="open don’t f*ck with ba"><img src="/_blob/4ddbe87637ccfbc8fb3ac41ccbf5b8ca" alt="don’t f*ck with ba film poster"><span class="ba-cap">Don’t F*ck with Ba<span class="ba-sub">(Film graphics)</span></span><span class="tape tape-l" aria-hidden="true"></span><span class="tape tape-r" aria-hidden="true"></span></button>
@@ -616,7 +621,7 @@ footer{position:relative;z-index:3}
 <div class="mstack">
 <div class="mhead">
 <img class="mband" src="/_blob/289773bcc61c340fa278b616af9107e7" alt="">
-<h1 class="ios-large">work :)</h1>
+<h1 class="ios-large">work</h1>
 </div>
 <sc-for list="{{shelves}}" as="s" hint-placeholder-count="4">
 <section class="mshelf" aria-label="{{s.name}}">
