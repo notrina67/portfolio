@@ -36,7 +36,7 @@ const upd = () => { const o = r.scrollWidth - r.clientWidth > 2; r.classList.tog
 if (!r.dataset.sh) { r.dataset.sh = '1'; r.addEventListener('scroll', upd, { passive: true });
 r.addEventListener('wheel', (e) => { if (r.scrollWidth - r.clientWidth < 3 || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return; const max = r.scrollWidth - r.clientWidth; if ((e.deltaY < 0 && r.scrollLeft <= 0) || (e.deltaY > 0 && r.scrollLeft >= max - 1)) return; e.preventDefault(); r.scrollLeft += e.deltaY; }, { passive: false }); }
 upd(); }); } catch (e) {} }
-syncVideo() { try { document.querySelectorAll('video.pj-video').forEach((vd) => { if (vd.dataset.s !== vd.getAttribute('src')) { vd.muted = true; vd.defaultMuted = true; vd.loop = true; vd.playsInline = true; vd.setAttribute('playsinline', ''); vd.dataset.s = vd.getAttribute('src'); const pr = vd.play(); if (pr && pr.catch) pr.catch(() => {}); } }); } catch (e) {} }
+syncVideo() { try { document.querySelectorAll('video.pj-video, video.gal-video').forEach((vd) => { if (vd.dataset.s !== vd.getAttribute('src')) { vd.muted = true; vd.defaultMuted = true; vd.loop = true; vd.playsInline = true; vd.setAttribute('playsinline', ''); vd.dataset.s = vd.getAttribute('src'); const pr = vd.play(); if (pr && pr.catch) pr.catch(() => {}); } }); } catch (e) {} }
 syncLights() { try {
 if (typeof IntersectionObserver === 'undefined') return;
 this._lit = this._lit || {};
@@ -62,7 +62,7 @@ this.setState({ mobile: !!(mm && mm.matches) });
 if (mm && mm.addEventListener) { this.mmh = (e) => this.setState({ mobile: e.matches }); mm.addEventListener('change', this.mmh); this.mm = mm; }
 }
 componentDidUpdate() {
-{ const st0 = this.state || {}; const sig = (st0.open ? 1 : 0) + '|' + (st0.view || '') + '|' + (st0.pk || ''); if (this._navSig !== undefined && sig !== this._navSig) { const prevV = this._navSig.split('|')[1]; let rm = false; try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {} if (!rm) { let el = null, dx = 0; if (st0.view === 'project') { el = document.querySelector('article.pj'); dx = 1; } else if (prevV === 'project') { el = document.querySelector('.room-pad'); dx = -1; } if (el && el.animate) el.animate([{ transform: 'translateX(' + (dx * 64) + 'px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' }); } } this._navSig = sig; }
+try { const st0 = this.state || {}; const sig = (st0.open ? 1 : 0) + '|' + (st0.view || 'work') + '|' + (st0.pk || ''); if (this._navSig !== undefined && sig !== this._navSig) { const pv = this._navSig.split('|'); const nv = sig.split('|'); let rm = false; try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {} if (!rm && pv[0] === '1' && nv[0] === '1') { const RANK = { work: 0, project: 0.5, archive: 0.5, personal: 1, about: 2 }; let dx = 0; if (pv[1] === 'project' && nv[1] === 'project') { const L = this._pjOrder || []; const a = L.indexOf(pv[2]); const b = L.indexOf(nv[2]); dx = b < a ? -1 : 1; } else if (pv[1] !== nv[1]) { dx = (RANK[nv[1]] ?? 0) >= (RANK[pv[1]] ?? 0) ? 1 : -1; } const el = nv[1] === 'project' ? document.querySelector('article.pj') : document.querySelector('.room-pad'); if (dx && el && el.animate) el.animate([{ transform: 'translateX(' + (dx * 64) + 'px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' }); } } this._navSig = sig; } catch (e) {}
 this.syncScroll(); this.syncShelves(); this.syncLights(); requestAnimationFrame(() => this.syncHint());
 const lbNow = !!(this.state && this.state.lb);
 if (lbNow && !this._lbWas) { try { const b = document.querySelector('.lb-close'); if (b) b.focus(); } catch (e) {} }
@@ -224,7 +224,7 @@ const lbS = st.lb;
 const ARCHP = (st.arch || []);
 const ALLP = PROJ.concat(ARCHP);
 const pj = ALLP.find((q) => q.k === (st.pk || this.props.pk || 'rhr')) || PROJ[0];
-const pjL = pj.arch ? ARCHP : PROJ;
+const pjL = pj.arch ? ARCHP : PROJ; this._pjOrder = ALLP.map((q) => q.k);
 const pjI = Math.max(0, pjL.indexOf(pj));
 const lbG = !lbS ? null : view === 'personal' ? GAL_DATA[lbS.g] : view === 'project' ? (lbS.g === 1 && pj.posts ? { name: pj.title + ' on Instagram', items: pj.posts } : { name: pj.title, items: pj.imgs }) : null;
 const lbN = lbG ? lbG.items.length : 0;

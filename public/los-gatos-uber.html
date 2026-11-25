@@ -698,7 +698,7 @@ img[src*="e006c01d33bcb6acfab3fd6728a85af5"]{scale:0.9}
 <section style="position: relative; display: flex; flex-direction: column; gap: 18px">
 <sc-if value="{{g.pencil}}" hint-placeholder-val="{{ false }}"><img class="pencil-poke" src="/_blob/9fd41221f70996560f9d5d7b33ccc4b0" alt="" aria-hidden="true"></sc-if>
 <h2 style="margin: 0; display: flex; align-items: baseline; justify-content: center; gap: 10px; flex-wrap: wrap; text-align: center; font-size: 24px; font-weight: 700; letter-spacing: -0.015em; color: #1C1C1E; border-bottom: 1px solid #E5E5EA; padding-bottom: 12px">{{g.name}}<span style="font-size: 14px; font-weight: 500; color: #6E6E73">{{g.count}}</span></h2>
-<sc-if value="{{g.video}}" hint-placeholder-val="{{ false }}"><video class="gal-video" src="{{g.video}}" poster="{{g.poster}}" controls playsinline preload="metadata" aria-label="beabadoobee edit by Chloe Le"></video></sc-if>
+<sc-if value="{{g.video}}" hint-placeholder-val="{{ false }}"><video class="gal-video" src="{{g.video}}" poster="{{g.poster}}" autoplay="{{ true }}" loop="{{ true }}" controls="{{ true }}" playsinline preload="auto" aria-label="beabadoobee edit by Chloe Le, muted"></video></sc-if>
 <sc-if value="{{g.hasItems}}" hint-placeholder-val="{{ true }}">
 <div class="gal-row">
 <sc-for list="{{g.items}}" as="it" hint-placeholder-count="6">
@@ -1012,7 +1012,7 @@ img[src*="e006c01d33bcb6acfab3fd6728a85af5"]{scale:0.9}
 </div>
 </template>
 <script src="/preact.js"></script>
-<script src="/runtime.js?v=85ff781e"></script>
-<script src="/app.js?v=85ff781e"></script>
+<script src="/runtime.js?v=c3fac934"></script>
+<script src="/app.js?v=c3fac934"></script>
 </body>
 </html>
