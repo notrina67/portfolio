@@ -406,6 +406,8 @@ img[src*="e006c01d33bcb6acfab3fd6728a85af5"]{scale:0.9}
 .inlay-m{transition:filter .6s ease}
 @media (hover:hover) and (min-width:701px){.inlay:not(.inlay-m) .proj-art{filter:grayscale(0.55) brightness(0.8)}.inlay:not(.inlay-m) .proj:hover .proj-art,.inlay:not(.inlay-m) .proj:focus-visible .proj-art{filter:none}}
 .inlay-m:not([data-lit]) .proj-art{filter:grayscale(0.55) brightness(0.8)}
+.brand-txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:min(560px,calc(100vw - 150px))}
+@media (max-width:700px){.brand-txt{font-size:19px!important}}
 @media (hover:hover) and (min-width:701px){.ba-poster.ba-d img{filter:grayscale(0.55) brightness(0.8)!important}.ba-poster.ba-d:hover img,.ba-poster.ba-d:focus-visible img{filter:brightness(1.05) drop-shadow(0 0 13.6px rgba(255,200,120,0.38))!important}}
 .ba-poster.ba-m:not([data-lit]) img{filter:grayscale(0.55) brightness(0.8)}
 @media (max-width:700px){.inlay.inlay-m .inlay-row{align-items:flex-start;gap:12px}.inlay.inlay-m .proj{flex:0 0 calc(50% - 6px);height:auto;aspect-ratio:1/1}.inlay.inlay-m .proj-title{font-size:13px}.inlay.inlay-m .proj-kind{font-size:11px}.pj-video{border-radius:12px}}
@@ -585,7 +587,7 @@ img[src*="e006c01d33bcb6acfab3fd6728a85af5"]{scale:0.9}
 <button class="back-btn home-arrow {{arrowCls}}" onClick="{{arrowGo}}" aria-label="{{arrowLabel}}" title="{{arrowLabel}}"><svg width="12" height="20" viewBox="0 0 10 16" aria-hidden="true"><path d="M8 2L2 8l6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
 <button class="back-btn" onClick="{{goWork}}" aria-label="chloe le, go to work" style="display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 8px 0; color: #1C1C1E">
 <img src="/_blob/3ad73b6355711990dec500b2a9de6198" alt="" style="width: 36px; height: 36px; display: block">
-<span style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">chloe le</span>
+<span class="brand-txt" style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em">{{brandText}}</span>
 </button>
 </div>
 <button type="button" class="burger" aria-label="{{menuLabel}}" aria-expanded="{{menuExp}}" aria-controls="main-nav" onClick="{{toggleMenu}}"><svg width="26" height="20" viewBox="0 0 26 20" aria-hidden="true"><path class="b1" d="M3 3h20"></path><path class="b2" d="M3 10h20"></path><path class="b3" d="M3 17h20"></path></svg></button>
@@ -1010,7 +1012,7 @@ img[src*="e006c01d33bcb6acfab3fd6728a85af5"]{scale:0.9}
 </div>
 </template>
 <script src="/preact.js"></script>
-<script src="/runtime.js?v=72bbd867"></script>
-<script src="/app.js?v=72bbd867"></script>
+<script src="/runtime.js?v=c0cb34d4"></script>
+<script src="/app.js?v=c0cb34d4"></script>
 </body>
 </html>

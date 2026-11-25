@@ -62,6 +62,7 @@ this.setState({ mobile: !!(mm && mm.matches) });
 if (mm && mm.addEventListener) { this.mmh = (e) => this.setState({ mobile: e.matches }); mm.addEventListener('change', this.mmh); this.mm = mm; }
 }
 componentDidUpdate() {
+{ const st0 = this.state || {}; const sig = (st0.open ? 1 : 0) + '|' + (st0.view || '') + '|' + (st0.pk || ''); if (this._navSig !== undefined && sig !== this._navSig) { const prevV = this._navSig.split('|')[1]; let rm = false; try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {} if (!rm) { let el = null, dx = 0; if (st0.view === 'project') { el = document.querySelector('article.pj'); dx = 1; } else if (prevV === 'project') { el = document.querySelector('.room-pad'); dx = -1; } if (el && el.animate) el.animate([{ transform: 'translateX(' + (dx * 64) + 'px)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' }); } } this._navSig = sig; }
 this.syncScroll(); this.syncShelves(); this.syncLights(); requestAnimationFrame(() => this.syncHint());
 const lbNow = !!(this.state && this.state.lb);
 if (lbNow && !this._lbWas) { try { const b = document.querySelector('.lb-close'); if (b) b.focus(); } catch (e) {} }
@@ -309,7 +310,7 @@ isAbout: view === 'about',
 navAbout: view === 'about' ? 'on' : '',
 curAbout: view === 'about' ? 'page' : 'false',
 goAbout: navTo('about'),
-isProject: view === 'project',
+isProject: view === 'project', brandText: view === 'project' ? ((pj.arch ? 'archive' : 'work') + ' – ' + pj.title) : 'chloe le',
 pj: (() => {
 const PH = mob ? 120 : 230;
 const hasVid = !!pj.video;
