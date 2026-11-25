@@ -310,7 +310,7 @@ isAbout: view === 'about',
 navAbout: view === 'about' ? 'on' : '',
 curAbout: view === 'about' ? 'page' : 'false',
 goAbout: navTo('about'),
-isProject: view === 'project', brandText: view === 'project' ? ((pj.arch ? 'archive' : 'work') + ' – ' + pj.title) : 'chloe le',
+isProject: view === 'project', workLabel: view === 'project' && !pj.arch ? 'work – ' + pj.title : 'work',
 pj: (() => {
 const PH = mob ? 120 : 230;
 const hasVid = !!pj.video;
