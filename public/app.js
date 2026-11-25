@@ -41,7 +41,7 @@ syncLights() { try {
 if (typeof IntersectionObserver === 'undefined') return;
 this._lit = this._lit || {};
 const apply = (row, on) => { document.querySelectorAll('[data-prow="' + row + '"]').forEach((x) => { if (on) x.setAttribute('data-lit', ''); else x.removeAttribute('data-lit'); }); };
-if (!this._io) this._io = new IntersectionObserver((ents) => { ents.forEach((e) => { const el = e.target; const on = e.isIntersecting; const k = el.getAttribute('data-row') || ''; if (k) this._lit[k] = on; if (on) el.setAttribute('data-lit', ''); else el.removeAttribute('data-lit'); if (k && k.charAt(0) !== 'm') apply(k, on); }); }, { rootMargin: '-22% 0px -22% 0px', threshold: 0 });
+if (!this._io) this._io = new IntersectionObserver((ents) => { ents.forEach((e) => { const el = e.target; const on = e.isIntersecting; const k = el.getAttribute('data-row') || ''; if (k) this._lit[k] = on; if (on) el.setAttribute('data-lit', ''); else el.removeAttribute('data-lit'); if (k && k.charAt(0) !== 'm') apply(k, on); }); }, { rootMargin: (window.innerWidth <= 700 ? '-42% 0px -42% 0px' : '-22% 0px -22% 0px'), threshold: 0 });
 document.querySelectorAll('.bookcase .inlay').forEach((el, i) => { el.setAttribute('data-row', String(i)); });
 document.querySelectorAll('.mstack .inlay-m').forEach((el, i) => { el.setAttribute('data-row', 'm' + i); });
 const ba = document.querySelector('.ba-poster.ba-m'); if (ba) ba.setAttribute('data-row', 'mba');

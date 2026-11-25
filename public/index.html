@@ -389,7 +389,7 @@ footer{position:relative;z-index:3}
 .ba-poster[data-lit] img{filter:brightness(1.08) drop-shadow(0 0 13.6px rgba(255,200,120,0.38))}
 .mstack .mband,.mstack .mside-l,.mstack .mside-r,.mstack .inlay-m{transition:filter .8s ease}
 .mstack[data-dim] .mband,.mstack[data-dim] .mside-l,.mstack[data-dim] .mside-r{filter:brightness(0.72)}
-.mstack[data-dim] .inlay-m:not([data-lit]){filter:brightness(0.8)}
+.mstack[data-dim] .inlay-m:not([data-lit]){filter:brightness(0.62) saturate(0.85)}
 .mstack[data-dim] .inlay-m:not([data-lit]) .mplate{filter:drop-shadow(2.1px 2.1px 0.2px rgba(20,12,6,0.45)) brightness(0.75)}
 .inlay-m[data-lit] .mplate{filter:drop-shadow(2.1px 2.1px 0.2px rgba(20,12,6,0.45)) drop-shadow(0 0 5px rgba(255,200,120,0.16)) brightness(1.03)}
 @media (prefers-reduced-motion: reduce){.bc-dim,.bc-spot,.inlay::after,.bookcase .inlay,.shelf-plate,.mplate,.ba-poster img,.cab{transition:none}}
@@ -399,6 +399,10 @@ footer{position:relative;z-index:3}
 .inlay .proj-kind{text-align:center!important;font-size:clamp(10px,0.8vw,12px)!important;color:#7C7C80!important}
 .inlay.inlay-m .proj-title{font-size:13px!important;white-space:normal!important}
 .inlay.inlay-m .proj-kind{font-size:11px!important}
+.inlay .proj-cover img{transition:filter .45s ease}
+.inlay-m{transition:filter .6s ease}
+@media (hover:hover) and (min-width:701px){.inlay:not(.inlay-m) .proj-cover img{filter:grayscale(1) contrast(0.95)}.inlay:not(.inlay-m) .proj:hover .proj-cover img,.inlay:not(.inlay-m) .proj:focus-visible .proj-cover img{filter:none}}
+.inlay-m:not([data-lit]) .proj-cover img{filter:grayscale(1) contrast(0.95)}
 @media (max-width:700px){.inlay.inlay-m .inlay-row{align-items:flex-start;gap:12px}.inlay.inlay-m .proj{flex:0 0 calc(50% - 6px);height:auto;aspect-ratio:1/1}.inlay.inlay-m .proj-title{font-size:13px}.inlay.inlay-m .proj-kind{font-size:11px}.pj-video{border-radius:12px}}
 .socials{display:flex;gap:10px;align-items:center}
 .soc-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;text-decoration:none;transition:transform .15s ease,opacity .15s ease}
@@ -1001,7 +1005,7 @@ footer{position:relative;z-index:3}
 </div>
 </template>
 <script src="/preact.js"></script>
-<script src="/runtime.js?v=990d94ff"></script>
-<script src="/app.js?v=990d94ff"></script>
+<script src="/runtime.js?v=546d0332"></script>
+<script src="/app.js?v=546d0332"></script>
 </body>
 </html>
