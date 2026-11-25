@@ -1,0 +1,18 @@
+{
+  "views": {"work": "/work", "personal": "/personal", "about": "/about", "archive": "/archive"},
+  "projects": {
+    "rhr": "red-hat-ringo",
+    "pon": "ponmac-games",
+    "d3": "3d-work",
+    "samp": "sampdle",
+    "mar": "marathon-ui",
+    "lg": "los-gatos-uber",
+    "hc": "hot-cue",
+    "utd": "ut-dallas-aht",
+    "ch": "chuuni-co",
+    "aaa": "asian-artists-association",
+    "sa": "studio-adore",
+    "vsa": "utd-vsa",
+    "ba": "dont-f-with-ba"
+  }
+}

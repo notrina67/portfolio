@@ -33,7 +33,12 @@ for f in os.listdir(STATIC):
     shutil.copyfile(os.path.join(STATIC, f), os.path.join(OUT, f))
 shutil.copyfile(os.path.join(os.path.dirname(__file__), 'node_modules/preact/dist/preact.min.umd.js'), os.path.join(OUT, 'preact.js'))
 rt = open(os.path.join(os.path.dirname(__file__), 'src/runtime.js'), encoding='utf-8').read()
-app = '(function(){\n' + code + '\nDCMount(Component, ' + json.dumps(props) + ');\n})();\n'
+ROUTES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/routes.json')))
+PROJ = json.loads(re.search(r'const PROJ = (\[.*?\]);\n', s, re.S).group(1))
+TITLES = {p['k']: p['title'] for p in PROJ}
+router = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/router.js'), encoding='utf-8').read()
+app = ('(function(){\n' + code + '\n' + router + '\nDCMount(makeRouted(Component, ' + json.dumps(ROUTES) + ', '
+       + json.dumps(TITLES) + '), ' + json.dumps(props) + ');\n})();\n')
 open(os.path.join(OUT, 'app.js'), 'w', encoding='utf-8').write(app)
 open(os.path.join(OUT, 'runtime.js'), 'w', encoding='utf-8').write(rt)
 v = hashlib.sha1((rt + app).encode()).hexdigest()[:8]
@@ -71,4 +76,39 @@ html = f'''<!doctype html>
 </html>
 '''
 open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(html)
+
+# One HTML file per route, with its own title, description and link preview.
+import html as H
+def page_for(path, title, desc, og_title):
+    url = 'https://chloerui.com' + path
+    h = html
+    h = re.sub(r'<title>[^<]*</title>', '<title>' + H.escape(title) + '</title>', h, count=1)
+    h = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m.group(1) + H.escape(desc), h, count=1)
+    h = re.sub(r'(<meta property="og:title" content=")[^"]*', lambda m: m.group(1) + H.escape(og_title), h, count=1)
+    h = re.sub(r'(<meta property="og:description" content=")[^"]*', lambda m: m.group(1) + H.escape(desc), h, count=1)
+    h = re.sub(r'(<meta property="og:url" content=")[^"]*', lambda m: m.group(1) + url, h, count=1)
+    h = re.sub(r'(<link rel="canonical" href=")[^"]*', lambda m: m.group(1) + url, h, count=1)
+    d = os.path.join(OUT, path.strip('/'))
+    if os.path.isdir(d): shutil.rmtree(d)
+    open(d + '.html', 'w', encoding='utf-8').write(h)
+    return url
+urls = ['https://chloerui.com/']
+VIEW_META = {'work': ('Work | Chloe Le', 'Selected design, game art, 3D and visual development work by Chloe Le.', 'chloe le | work'),
+             'personal': ('Personal work | Chloe Le', 'Illustration, motion graphics, photography and other personal work by Chloe Le.', 'chloe le | personal'),
+             'about': ('About + resume | Chloe Le', 'About Chloe Le, designer and visual development artist based in Dallas, TX and NYC: experience, skills and resume.', 'chloe le | about + resume'),
+             'archive': ('Archive | Chloe Le', 'Archive of older work by Chloe Le.', 'chloe le | archive')}
+for v, path in ROUTES['views'].items():
+    t, d, o = VIEW_META[v]
+    u = page_for(path, t, d, o)
+    if v != 'archive': urls.append(u)
+for p in PROJ:
+    slug = ROUTES['projects'].get(p['k'])
+    if not slug: continue
+    desc = p.get('tag') or (p['title'] + ' by Chloe Le.')
+    urls.append(page_for('/' + slug, p['title'] + ' | Chloe Le', desc, 'chloe le | ' + p['title'].lower()))
+sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+sm += ['  <url><loc>' + u + '</loc></url>' for u in urls] + ['</urlset>', '']
+open(os.path.join(OUT, 'sitemap.xml'), 'w').write('\n'.join(sm))
+missing = [p['k'] for p in PROJ if p['k'] not in ROUTES['projects']]
+if missing: print('WARNING: projects without a URL:', missing)
 print('built', len(html), 'bytes; props', props)
