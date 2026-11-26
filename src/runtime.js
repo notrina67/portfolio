@@ -24,6 +24,11 @@
   function interp(str, scope) {
     return str.replace(HOLE, function (_, e) { var v = lookup(scope, e); return v == null || v === false ? '' : String(v); });
   }
+  var IMG = window.DC_IMG || {};
+  function light(u) {
+    var m = typeof u === 'string' && u.match(/^\/_blob\/([0-9a-f]{32})$/);
+    return m && IMG[m[1]] ? '/_v/' + m[1] + '-' + IMG[m[1]] + '.webp' : u;
+  }
   function truthy(v) { return Array.isArray(v) ? v.length > 0 : !!v; }
 
   // Compile DOM -> lightweight tree once.
@@ -83,7 +88,10 @@
       if (val == null || val === false) continue;
       props[at.n] = val;
     }
-    if (n.tag === 'video') { props.playsInline = true; if ('autoplay' in props) props.muted = true; }
+    if (n.tag === 'video') { props.playsInline = true; if ('autoplay' in props) props.muted = true; if (props.poster) props.poster = light(props.poster); }
+    // Use the lighter display copy, except in the full-size viewer.
+    if (n.tag === 'img' && props.src && !/(^|\s)lb-img(\s|$)/.test(props['class'] || '')) props.src = light(props.src);
+    if (typeof props.style === 'string' && props.style.indexOf('/_blob/') >= 0) props.style = props.style.replace(/\/_blob\/([0-9a-f]{32})/g, function (u) { return light(u); });
     return h.apply(null, [n.tag, props].concat(kidsOf(n, scope)));
   }
   function kidsOf(n, scope) {

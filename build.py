@@ -27,6 +27,67 @@ logo.save(os.path.join(OUT, 'favicon.ico'), sizes=[(16, 16), (32, 32), (48, 48)]
 touch = Image.new('RGBA', (180, 180), (247, 241, 225, 255))
 touch.alpha_composite(logo.resize((150, 150), Image.LANCZOS), (15, 15))
 touch.convert('RGB').save(os.path.join(OUT, 'apple-touch-icon.png'))
+# Lighter display copies of images: WebP at 2x the largest size each image is drawn
+# (3x on phones), from tools/measure.py. The full-size viewer keeps the originals.
+from PIL import ImageOps
+SIZES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/imgsizes.json')))
+TYPES = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'worker/types.json')))
+VDIR = os.path.join(OUT, '_v')
+os.makedirs(VDIR, exist_ok=True)
+VAR = {}      # blob id -> variant width
+VBYTES = {}
+BLOB_URL = re.compile(r'url\(\s*([\'"]?)/_blob/([0-9a-f]{32})\1\s*\)')
+CSS_IDS = {m.group(2) for t in (head, helmet, tpl) for m in BLOB_URL.finditer(t)}
+FULL = CSS_IDS - set(SIZES['need']) - set(SIZES['needMobile'])  # e.g. border-image frames: keep exact pixel size
+for bid in set(SIZES['need']) | set(SIZES['needMobile']) | FULL:
+    f = os.path.join(OUT, '_blob', bid)
+    if TYPES.get(bid) not in ('image/jpeg', 'image/png', 'image/webp') or not os.path.exists(f):
+        continue
+    im = Image.open(f)
+    if getattr(im, 'n_frames', 1) > 1:
+        continue
+    want = max(SIZES['need'].get(bid, 0) * 2, SIZES['needMobile'].get(bid, 0) * 3)
+    w = im.width if bid in FULL else min(im.width, -(-int(want) // 16) * 16)
+    out = os.path.join(VDIR, f'{bid}-{w}.webp')
+    if not os.path.exists(out):
+        icc = im.info.get('icc_profile')
+        im = ImageOps.exif_transpose(im)
+        if w < im.width:
+            im = im.resize((w, max(1, round(im.height * w / im.width))), Image.LANCZOS)
+        if im.mode not in ('RGB', 'RGBA'):
+            im = im.convert('RGBA' if 'A' in im.getbands() or 'transparency' in im.info else 'RGB')
+        kw = {'quality': 82, 'method': 6}
+        if icc: kw['icc_profile'] = icc
+        im.save(out, 'WEBP', **kw)
+    # only use the copy when it is clearly smaller than the original
+    if os.path.getsize(out) < os.path.getsize(f) * 0.85:
+        VAR[bid] = w
+        VBYTES[bid] = os.path.getsize(out)
+for fn in os.listdir(VDIR):  # drop stale copies
+    bid, _, rest = fn.partition('-')
+    if VAR.get(bid) != int(rest.split('.')[0]):
+        os.remove(os.path.join(VDIR, fn))
+def vurl(bid):
+    return f'/_v/{bid}-{VAR[bid]}.webp' if bid in VAR else '/_blob/' + bid
+helmet = BLOB_URL.sub(lambda m: 'url(' + vurl(m.group(2)) + ')', helmet)
+head = BLOB_URL.sub(lambda m: 'url(' + vurl(m.group(2)) + ')', head)
+tpl = BLOB_URL.sub(lambda m: 'url(' + vurl(m.group(2)) + ')', tpl)
+print('image copies:', len(VAR), 'images,', round(sum(VBYTES.values()) / 1e6, 1), 'MB vs',
+      round(sum(os.path.getsize(os.path.join(OUT, '_blob', b)) for b in VAR) / 1e6, 1), 'MB originals')
+
+def preloads(path):
+    """<link rel=preload> for the largest images visible before scrolling on this page."""
+    t = SIZES['top'].get(path, {})
+    d, m = set(t.get('d', [])), set(t.get('m', []))
+    big = lambda ids: sorted((b for b in ids if VBYTES.get(b, os.path.getsize(os.path.join(OUT, '_blob', b)) if os.path.exists(os.path.join(OUT, '_blob', b)) else 0) > 15000),
+                             key=lambda b: -VBYTES.get(b, 0))[:5]
+    d, m = set(big(d)), set(big(m))
+    out = []
+    for b in sorted(d | m):
+        media = '' if (b in d and b in m) else (' media="(min-width:701px)"' if b in d else ' media="(max-width:700px)"')
+        out.append(f'<link rel="preload" as="image" href="{vurl(b)}" fetchpriority="high"{media}>')
+    return '\n'.join(out)
+
 # Static files (link preview image, robots, sitemap)
 STATIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 for f in os.listdir(STATIC):
@@ -40,6 +101,7 @@ router = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src/rout
 app = ('(function(){\n' + code + '\n' + router + '\nDCMount(makeRouted(Component, ' + json.dumps(ROUTES) + ', '
        + json.dumps(TITLES) + '), ' + json.dumps(props) + ');\n})();\n')
 open(os.path.join(OUT, 'app.js'), 'w', encoding='utf-8').write(app)
+rt = 'window.DC_IMG=' + json.dumps(VAR, separators=(',', ':')) + ';\n' + rt
 open(os.path.join(OUT, 'runtime.js'), 'w', encoding='utf-8').write(rt)
 v = hashlib.sha1((rt + app).encode()).hexdigest()[:8]
 
@@ -63,6 +125,7 @@ html = f'''<!doctype html>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!--preloads-->
 {helmet.strip()}
 </head>
 <body>
@@ -75,13 +138,13 @@ html = f'''<!doctype html>
 </body>
 </html>
 '''
-open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(html)
+open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(html.replace('<!--preloads-->', preloads('/')))
 
 # One HTML file per route, with its own title, description and link preview.
 import html as H
 def page_for(path, title, desc, og_title):
     url = 'https://chloerui.com' + path
-    h = html
+    h = html.replace('<!--preloads-->', preloads(path))
     h = re.sub(r'<title>[^<]*</title>', '<title>' + H.escape(title) + '</title>', h, count=1)
     h = re.sub(r'(<meta name="description" content=")[^"]*', lambda m: m.group(1) + H.escape(desc), h, count=1)
     h = re.sub(r'(<meta property="og:title" content=")[^"]*', lambda m: m.group(1) + H.escape(og_title), h, count=1)

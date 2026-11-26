@@ -15,6 +15,12 @@ export default {
       page.headers.set('Cache-Control', 'no-cache');
       return page;
     }
+    if (url.pathname.startsWith('/_v/') && res.ok) {
+      const v = new Response(res.body, res);
+      v.headers.set('Content-Type', 'image/webp');
+      v.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+      return v;
+    }
     if (!m || !res.ok) return res;
     const out = new Response(res.body, res);
     out.headers.set('Content-Type', TYPES[m[1]] || 'application/octet-stream');
