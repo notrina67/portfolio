@@ -106,7 +106,7 @@ open(os.path.join(OUT, 'runtime.js'), 'w', encoding='utf-8').write(rt)
 v = hashlib.sha1((rt + app).encode()).hexdigest()[:8]
 
 noscript = '''<noscript><main style="font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 20px">
-<h1>Chloe Le</h1><p>Designer and visual development artist working across UI/UX, game art, 3D, graphic design and art direction. Based in Dallas, TX and NYC.</p>
+<h1>Chloe Le</h1><p>Designer and visual development artist working across UI/UX, front-end development, game art, 3D, graphic design and art direction. Based in Dallas, TX and NYC.</p>
 <p>This portfolio needs JavaScript. You can also find Chloe on <a href="https://www.linkedin.com/in/chlo-le">LinkedIn</a>.</p></main></noscript>'''
 
 html = f'''<!doctype html>
@@ -156,7 +156,7 @@ def page_for(path, title, desc, og_title):
     open(d + '.html', 'w', encoding='utf-8').write(h)
     return url
 urls = ['https://chloerui.com/']
-VIEW_META = {'work': ('Work | Chloe Le', 'Selected design, game art, 3D and visual development work by Chloe Le.', 'chloe le | work'),
+VIEW_META = {'work': ('Work | Chloe Le', 'Selected design, front-end development, game art, 3D and visual development work by Chloe Le.', 'chloe le | work'),
              'personal': ('Personal work | Chloe Le', 'Illustration, motion graphics, photography and other personal work by Chloe Le.', 'chloe le | personal'),
              'about': ('About + resume | Chloe Le', 'About Chloe Le, designer and visual development artist based in Dallas, TX and NYC: experience, skills and resume.', 'chloe le | about + resume'),
              'archive': ('Archive | Chloe Le', 'Archive of older work by Chloe Le.', 'chloe le | archive')}
