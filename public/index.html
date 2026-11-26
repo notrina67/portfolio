@@ -131,12 +131,13 @@ a{color:#356544}a:hover{color:#1C1C1E}
 .cw-l{top:0;bottom:0;left:0;width:var(--d);background:#CDCDCD;clip-path:polygon(0 0,100% var(--d),100% calc(100% - var(--d)),0 100%)}
 .cw-r{top:0;bottom:0;right:0;width:var(--d);background:#CDCDCD;clip-path:polygon(0 var(--d),100% 0,100% 100%,0 calc(100% - var(--d)))}
 .cw-back{position:absolute;left:var(--d);right:var(--d);top:var(--d);bottom:var(--d);pointer-events:none;background:#E1E1E1}
-.inlay.m-grass{--img:none;--tint:#DBD8D4}.inlay.m-alu{--img:none;--tint:#DBD8D4}.inlay.m-paper{--img:none;--tint:#DBD8D4}.inlay.m-marble{--img:none;--tint:#DBD8D4}
+.inlay.m-grass{--img:url(/_v/5620543dd1735929ab81c3dea2bef3f2-1400.webp);--tint:#DBD8D4}.inlay.m-alu{--img:url(/_v/5620543dd1735929ab81c3dea2bef3f2-1400.webp);--tint:#DBD8D4}.inlay.m-paper{--img:url(/_v/5620543dd1735929ab81c3dea2bef3f2-1400.webp);--tint:#DBD8D4}.inlay.m-marble{--img:url(/_v/5620543dd1735929ab81c3dea2bef3f2-1400.webp);--tint:#DBD8D4}
+.inlay[class*=" m-"]{--wash:linear-gradient(rgba(219,216,212,0.4),rgba(219,216,212,0.4))}
 .inlay.m-grass,.inlay.m-alu,.inlay.m-paper,.inlay.m-marble{background:var(--tint)}
-.inlay[class*=" m-"] .cw-back{background:var(--img) center/cover,var(--tint)}
-.inlay[class*=" m-"] .cw-t{background:linear-gradient(rgba(0,0,0,0.11),rgba(0,0,0,0.11)),var(--img) center top/cover,var(--tint)}
-.inlay[class*=" m-"] .cw-l,.inlay[class*=" m-"] .cw-r{background:linear-gradient(rgba(0,0,0,0.06),rgba(0,0,0,0.06)),var(--img) center/cover,var(--tint)}
-.inlay[class*=" m-"] .cw-b{background:linear-gradient(rgba(255,255,255,0.12),rgba(255,255,255,0.12)),var(--img) center bottom/cover,var(--tint)}
+.inlay[class*=" m-"] .cw-back{background:var(--wash),var(--img) center/cover,var(--tint)}
+.inlay[class*=" m-"] .cw-t{background:linear-gradient(rgba(0,0,0,0.11),rgba(0,0,0,0.11)),var(--wash),var(--img) center top/cover,var(--tint)}
+.inlay[class*=" m-"] .cw-l,.inlay[class*=" m-"] .cw-r{background:linear-gradient(rgba(0,0,0,0.06),rgba(0,0,0,0.06)),var(--wash),var(--img) center/cover,var(--tint)}
+.inlay[class*=" m-"] .cw-b{background:linear-gradient(rgba(255,255,255,0.12),rgba(255,255,255,0.12)),var(--wash),var(--img) center bottom/cover,var(--tint)}
 .m-grass{--wk:#DDE7CB;--wt:#9FB482;--ws:#BACB9F;--wb:#EAF0DD;--tx:repeating-linear-gradient(97deg,rgba(70,110,45,0.07) 0 2px,transparent 2px 9px),repeating-linear-gradient(83deg,rgba(255,255,255,0.18) 0 1px,transparent 1px 13px)}
 .m-alu{--wk:#E3E5E8;--wt:#A7ACB3;--ws:#C2C6CB;--wb:#F1F2F4;--tx:linear-gradient(112deg,rgba(255,255,255,0.32),rgba(255,255,255,0) 42%,rgba(255,255,255,0.22) 70%,rgba(255,255,255,0)),repeating-linear-gradient(0deg,rgba(255,255,255,0.28) 0 1px,rgba(0,0,0,0.03) 1px 2px,transparent 2px 3px)}
 .m-paper{--wk:#F3EEE3;--wt:#CFC5B2;--ws:#E0D8C8;--wb:#F8F5EE;--tx:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.42  0 0 0 0 0.35  0 0 0 0 0.26  0 0 0 0.10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
@@ -1022,7 +1023,7 @@ img[src*="e006c01d33bcb6acfab3fd6728a85af5"]{scale:0.9}
 </div>
 </template>
 <script src="/preact.js"></script>
-<script src="/runtime.js?v=9c1dd75e"></script>
-<script src="/app.js?v=9c1dd75e"></script>
+<script src="/runtime.js?v=494f3a1b"></script>
+<script src="/app.js?v=494f3a1b"></script>
 </body>
 </html>
